@@ -50,10 +50,10 @@
             var domain = window.location.hostname
             var item = item +
             `
-              <tr>
-                <th scope="row">${count}</th>
-                <td>${list[i].nlong}</td>
-                <td><a href="./${list[i].short}" target="_blank">${domain}/${list[i].short}</a></td>
+              <tr class="d-flex">
+                <th class="col-1">${count}</th>
+                <td class="overflow-auto col-8"><input class='form-control' id='copylink' value ="${list[i].nlong}" readonly></input></td>
+                <td><a href="./${list[i].short}" class='col-4' target="_blank">${domain}/${list[i].short}</a></td>
               </tr>
             `
           }
