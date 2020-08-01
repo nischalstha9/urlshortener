@@ -13,34 +13,16 @@
   <body>
     {% block content %}
     <div class="container">
-        <h1>URL SHORTNER</h1>
+        <h1 class='pt-4'>URL SHORTNER</h1>
         <form action='.' method='POST'>
           <div class="form-group">
             {% csrf_token %}
             <label for="long_url">Your URL:</label>
             <input type="text" class="form-control" name ='full_url' placeholder = 'Enter URL To Shrink Here' id='long_url' required>
           </div>
-            <input type='submit' class='btn btn-primary' value='Shorten'>
+            <input type='submit' class='btn btn-primary' value='Shrink'>
         </form><hr>
-        <input id="search" class='form-control' type="text" placeholder="Search Short URLS Here"></input>
-        <table class="table" id="url-table" style="display: none;">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">LONG URL</th>
-              <th scope="col">SHORT</th>
-            </tr>
-          </thead>
-          <tbody id="filterdata">
-          {% for i in urls %}
-            <tr>
-              <th scope="row">{{forloop.counter}}</th>
-              <td>{{i.nlong}}</td>
-              <td><a href="./{{i.short}}" target="_blank">127.0.0.1/{{i.short}}</a></td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
+        {% include 'table.html' %}
     </div>
     {% endblock content %}
 
@@ -48,7 +30,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 
 
         <!-- Optional JavaScript -->
@@ -66,19 +47,19 @@
           var list = data
           for(var i in list){
             var count = parseInt(i)+1
+            var domain = window.location.hostname
             var item = item +
             `
               <tr>
                 <th scope="row">${count}</th>
                 <td>${list[i].nlong}</td>
-                <td><a href="./${list[i].short}" target="_blank">127.0.0.1/${list[i].short}</a></td>
+                <td><a href="./${list[i].short}" target="_blank">${domain}/${list[i].short}</a></td>
               </tr>
             `
           }
             $("#filterdata").html(item)
         })
       })
-
     });
     
     </script>
