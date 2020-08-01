@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class ='container'>
+    <h1>Your shrunk URL is {{ request.META.HTTP_HOST }}/{{shrunk_url}}.</h1><br>
+    <a href='./{{shrunk_url}}'>Click Here to Visit</a>
+</div>
+{% endblock content %}
