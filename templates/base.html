@@ -15,12 +15,15 @@
     <div class="container">
         <h1>URL SHORTNER</h1>
         <form action='.' method='POST'>
+          <div class="form-group">
             {% csrf_token %}
-            <input type="text" name ='full_url' placeholder = 'Full URL Here' id='long_url' required>
-            <input type='submit' value='Shorten'>
-        </form>
-        <input id="search" type="text" placeholder="search URLS here"></input>
-        <table class="table">
+            <label for="long_url">Your URL:</label>
+            <input type="text" class="form-control" name ='full_url' placeholder = 'Enter URL To Shrink Here' id='long_url' required>
+          </div>
+            <input type='submit' class='btn btn-primary' value='Shorten'>
+        </form><hr>
+        <input id="search" class='form-control' type="text" placeholder="Search Short URLS Here"></input>
+        <table class="table" id="url-table" style="display: none;">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -59,7 +62,7 @@
         fetch(url)
         .then((resp) => resp.json())
         .then(function(data){
-          console.log(data);
+          $("table").css("display",'');
           var list = data
           for(var i in list){
             var count = parseInt(i)+1

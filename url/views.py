@@ -21,10 +21,12 @@ def HomeView(request):
     if request.method=='POST':
         _long=request.POST.get('full_url').strip()
         _long = check(_long)
-        if urls.objects.filter(nlong=_long).exists():
-            return render(request, "base.html", context)
+        qs = urls.objects.filter(nlong=_long)
+        if qs.exists():
+            q = qs.first()
+            return render(request, 'complete.html',{"shrunk_url":q.short})
         _short = get_random_alphanumeric_string(random.randint(1,10))
-        urls.objects.create(nlong=_long, short=_short)    
+        urls.objects.create(nlong=_long, short=_short)
         return render(request, 'complete.html', {'shrunk_url':_short})
     return render(request, "base.html", context)
 

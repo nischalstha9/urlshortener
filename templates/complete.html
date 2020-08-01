@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class ='container'>
-    <h1>Your shrunk URL is {{ request.META.HTTP_HOST }}/{{shrunk_url}}.</h1><br>
-    <a href='./{{shrunk_url}}'>Click Here to Visit</a>
+    <h1>Your shrunk URL is <code>{{ request.META.HTTP_HOST }}/{{shrunk_url}}</code>.</h1><br>
+    <a href='./{{shrunk_url}}' class='btn btn-info d-block'>Click Here to Visit</a><hr>
+    <a href='/' class='btn btn-success d-block'>Go Home</a>
+    <hr>
+    <input id="search" class='form-control' type="text" placeholder="Search Short URLS Here"></input>
+    <table class="table" id="url-table" style="display: none;">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">LONG URL</th>
+          <th scope="col">SHORT</th>
+        </tr>
+      </thead>
+      <tbody id="filterdata">
+      {% for i in urls %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{i.nlong}}</td>
+          <td><a href="./{{i.short}}" target="_blank">127.0.0.1/{{i.short}}</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
 </div>
 {% endblock content %}
